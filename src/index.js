@@ -3,6 +3,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const morgan = require('morgan');
 const path = require('path');
+const historyApiFallback = require('connect-history-api-fallback');
 
 const { mongoose } = require('./database');
 
@@ -10,6 +11,7 @@ const { mongoose } = require('./database');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const config = require('../webpack.config')
+
 
 const application = express();
 application.use(morgan('dev'));
@@ -26,7 +28,7 @@ const io = socketIo(server);
 io.on('connection', socket => {
     console.log('socket connected: ', socket.id);
 });
-
+application.use(historyApiFallback());
 application.use(webpackMiddleware(webpack(config)));
 
 application.use(express.static(path.join(__dirname, 'public')));

@@ -1,25 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import App from './App'
 
 
 
 
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
-
-    render() {
-
-        return (
-            <div><h1>Hello world</h1></div>
-
-        );
-    }
-}
-
-
-render(< App />, document.getElementById('root'))
+ReactDOM.render(< App />, document.getElementById('root'))
