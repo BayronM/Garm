@@ -10,8 +10,13 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@material-ui/icons/Home';
+import Collapse from '@material-ui/core/Collapse';
+import AddIcon from '@material-ui/icons/Add';
+import ApartmentIcon from '@material-ui/icons/Apartment';
+import ListIcon from '@material-ui/icons/List';
+import PeopleIcon from '@material-ui/icons/People';
 
 const drawerWidth = 240;
 
@@ -34,10 +39,19 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3),
     },
     toolbar: theme.mixins.toolbar,
+    nested: {
+        paddingLeft: theme.spacing(4),
+    },
 }));
 
 export default function ClippedDrawer() {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickApartment = () => {
+        setOpen(!open);
+    };
+
 
     return (
         <React.Fragment>
@@ -58,23 +72,46 @@ export default function ClippedDrawer() {
             >
                 <div className={classes.toolbar} />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+
+                    <ListItem button component={Link} to='/'>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary="Inicio" />
+                    </ListItem>
+                    <ListItem button onClick={handleClickApartment}>
+                        <ListItemIcon><ApartmentIcon /></ListItemIcon>
+                        <ListItemText primary="Viviendas" />
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/apartment'>
+                                <ListItemIcon>
+                                    <ListIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Lista de Viviendas " />
+                            </ListItem>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/apartment/create'>
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar Vivienda " />
+                            </ListItem>
+
+                        </List>
+                    </Collapse>
+                    <ListItem button component={Link} to='/'>
+                        <ListItemIcon><PeopleIcon /></ListItemIcon>
+                        <ListItemText primary="Residentes" />
+                    </ListItem>
                 </List>
                 <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
+
             </Drawer>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
