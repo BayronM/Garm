@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Home from './home';
-import Apartment from './apartment';
+import Home from './Components/home';
+import Apartment from './Components/apartment';
 import Menu from './menu';
 import { makeStyles } from '@material-ui/core/styles';
+import AddApartment from './Components/AddApartment';
 
 const drawerWidth = 240;
 
@@ -35,11 +36,16 @@ function App() {
         <Router>
             <div className={classes.root}>
                 <Menu />
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
 
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/apartment" exact component={Apartment} />
-                </Switch>
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/apartment/create" component={AddApartment} />
+                        <Route path="/apartment" component={Apartment} />
+
+                    </Switch>
+                </main>
             </div>
         </Router >
     );

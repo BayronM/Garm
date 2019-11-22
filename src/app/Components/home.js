@@ -30,8 +30,7 @@ export default function Home() {
 
     const classes = useStyles();
     return (
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
+        <React.Fragment>
             <Typography paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                 ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
@@ -56,8 +55,7 @@ export default function Home() {
                 nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
                 accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
-        </main>
-
+        </React.Fragment>
     );
 }
 

@@ -5,7 +5,7 @@ const Apartment = require('../models/Apartment.model');
 
 router.get('/', async (req, res) => {
 
-  const apartments = await Apartments.find();
+  const apartments = await Apartment.find();
   res.json(apartments)
 
 });
@@ -21,10 +21,6 @@ router.post('/', async (req, res) => {
       ownerphone: req.body.ownerphone
     }
   })
-
-
-
-
   await apartment.save();
   res.json({ status: 'New Apartment Saved' });
 });
