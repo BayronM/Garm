@@ -5,8 +5,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 
@@ -31,8 +31,6 @@ export default class Apartment extends React.Component {
     }
 
 
-
-
     render() {
         return (
             <Paper style={{
@@ -51,6 +49,7 @@ export default class Apartment extends React.Component {
                             <TableCell align="right">Nombre del Dueño</TableCell>
                             <TableCell align="right">Apellido del Dueño</TableCell>
                             <TableCell align="right">Telefono del Dueño</TableCell>
+                            <TableCell align="right">Operaciones</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -63,6 +62,10 @@ export default class Apartment extends React.Component {
                                 <TableCell align="right">{apartment.owner.ownername}</TableCell>
                                 <TableCell align="right">{apartment.owner.ownerlastname}</TableCell>
                                 <TableCell align="right">{apartment.owner.ownerphone}</TableCell>
+                                <TableCell align="right">
+                                    <CreateIcon/>
+                                    <DeleteIcon/>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

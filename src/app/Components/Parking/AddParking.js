@@ -5,27 +5,25 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
 
 
-
-export default class AddApartment extends React.Component {
+export default class AddParking extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            code: ' ',
-            ownerid: '',
-            ownername: '',
-            ownerlastname: '',
-            ownerphone: '',
+            id: ' ',
+            codigo: '',
+            estado: '',
         };
-        this.saveApartment = this.saveApartment.bind(this);
+        this.saveParking = this.saveParking.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    saveApartment(s) {
+    saveParking(s) {
         s.preventDefault();
-        fetch('/api/apartments', {
+        fetch('/api/parkings', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -38,11 +36,9 @@ export default class AddApartment extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({
-                    code: ' ',
-                    ownerid: '',
-                    ownername: '',
-                    ownerlastname: '',
-                    ownerphone: '',
+                    id: ' ',
+                    codigo: '',
+                    estado: '',
                 });
             })
             .catch(err => console.error(err));
@@ -67,50 +63,35 @@ export default class AddApartment extends React.Component {
             }}>
 
                 <Typography variant="h5" component="h6" align="center">
-                    Crear una nueva vivienda
+                    Ingresar una nuevo puesto de estacionamiento
             </Typography>
-                <form onSubmit={this.saveApartment}>
+                <form onSubmit={this.saveParking}>
                     <CardContent>
 
                         <TextField
-                            name="code"
+                            name="id"
                             id="standard-basic"
-                            label="Codigo de Vivienda"
+                            label="Id del Estacionamiento"
                             margin="normal"
                             align=" center"
                             onChange={this.handleChange}
-                            value={this.state.code}
+                            value={this.state.id}
                         />
                         <TextField
-                            name="ownerid"
+                            name="codigo"
                             id="standard-basic"
-                            label="Rut del dueño"
+                            label="Codigo del estacionamiento"
                             margin="normal"
                             onChange={this.handleChange}
-                            value={this.state.ownerid}
+                            value={this.state.codigo}
                         />
                         <TextField
-                            name="ownername"
+                            name="estado"
                             id="standard-basic"
-                            label="Nombre del dueño"
+                            label="Estado del Estacionamiento"
                             margin="normal"
                             onChange={this.handleChange}
-                            value={this.state.ownername}
-                        />
-                        <TextField
-                            name="ownerlastname"
-                            id="standard-basic"
-                            label="Apellido del dueño"
-                            margin="normal"
-                            onChange={this.handleChange}
-                            value={this.state.ownerlastname}
-                        />
-                        <TextField
-                            name="ownerphone"
-                            id="standard-basic"
-                            label="Telefono del Dueño"
-                            margin="normal"
-                            onChange={this.ownerphone}
+					        value={this.state.estado}	
                         />
                     </CardContent>
                     <CardActions>

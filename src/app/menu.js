@@ -17,6 +17,14 @@ import AddIcon from '@material-ui/icons/Add';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import ListIcon from '@material-ui/icons/List';
 import PeopleIcon from '@material-ui/icons/People';
+import PersonIcon from '@material-ui/icons/Person';
+import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
+import WorkIcon from '@material-ui/icons/Work';
+import StorageIcon from '@material-ui/icons/Storage';
+
+
+
+
 
 const drawerWidth = 240;
 
@@ -51,8 +59,18 @@ export default function ClippedDrawer() {
     const handleClickApartment = () => {
         setOpen(!open);
     };
-
-
+    const handleClickOwner = () => {
+        setOpen(!open);
+    };
+    const handleClickEmployee = () => {
+        setOpen(!open);
+    };
+    const handleClickParking = () => {
+        setOpen(!open);
+    };
+    const handleClickWarehouse = () => {
+        setOpen(!open);
+    };
     return (
         <React.Fragment>
             <CssBaseline />
@@ -108,6 +126,114 @@ export default function ClippedDrawer() {
                         <ListItemIcon><PeopleIcon /></ListItemIcon>
                         <ListItemText primary="Residentes" />
                     </ListItem>
+                    <ListItem button onClick={handleClickOwner}>
+                        <ListItemIcon><PersonIcon /></ListItemIcon>
+                        <ListItemText primary="Propietarios" />
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/owner'>
+                                <ListItemIcon>
+                                    <ListIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Lista de Propietarios " />
+                            </ListItem>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/owner/create'>
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar Propietario " />
+                            </ListItem>
+
+                        </List>
+                    </Collapse>
+                    <ListItem button onClick={handleClickEmployee}>
+                        <ListItemIcon><WorkIcon /></ListItemIcon>
+                        <ListItemText primary="Empleados" />
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/employee'>
+                                <ListItemIcon>
+                                    <ListIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Lista de Empleados " />
+                            </ListItem>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/employee/create'>
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar Empleado " />
+                            </ListItem>
+
+                        </List>
+                    </Collapse>
+                    <ListItem button onClick={handleClickParking}>
+                        <ListItemIcon><DirectionsCarIcon /></ListItemIcon>
+                        <ListItemText primary="Estacionamiento" />
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/parking'>
+                                <ListItemIcon>
+                                    <ListIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Lista de Puestos de Estacionamiento " />
+                            </ListItem>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/parking/create'>
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar Puesto de estacionamiento " />
+                            </ListItem>
+
+                        </List>
+                    </Collapse>
+                    <ListItem button onClick={handleClickWarehouse}>
+                        <ListItemIcon><StorageIcon /></ListItemIcon>
+                        <ListItemText primary="Bodega" />
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/warehouse'>
+                                <ListItemIcon>
+                                    <ListIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Lista de Puestos de Bodega " />
+                            </ListItem>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/warehouse/create'>
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar Puesto de bodega " />
+                            </ListItem>
+
+                        </List>
+                    </Collapse>
                 </List>
                 <Divider />
 
