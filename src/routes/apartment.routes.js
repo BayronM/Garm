@@ -13,13 +13,12 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
   const apartment = new Apartment({
-    code: req.body.code,
-    owner: {
-      ownerid: req.body.ownerid,
-      ownername: req.body.ownername,
-      ownerlastname: req.body.ownerlastname,
-      ownerphone: req.body.ownerphone
-    }
+    codigo: req.body.codigo,
+    com: req.body.com,
+    bod: req.body.bod,
+    est: req.body.est,
+    estado: req.body.estado,
+    
   })
   await apartment.save();
   res.json({ status: 'New Apartment Saved' });

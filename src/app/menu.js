@@ -54,22 +54,29 @@ const useStyles = makeStyles(theme => ({
 
 export default function ClippedDrawer() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-
+    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
+    const [open4, setOpen4] = React.useState(false);
+    const [open5, setOpen5] = React.useState(false);
+    const [open6, setOpen6] = React.useState(false);
     const handleClickApartment = () => {
-        setOpen(!open);
+        setOpen1(!open1);
     };
     const handleClickOwner = () => {
-        setOpen(!open);
+        setOpen2(!open2);
     };
     const handleClickEmployee = () => {
-        setOpen(!open);
+        setOpen3(!open3);
     };
     const handleClickParking = () => {
-        setOpen(!open);
+        setOpen4(!open4);
     };
     const handleClickWarehouse = () => {
-        setOpen(!open);
+        setOpen5(!open5);
+    };
+    const handleClickHouseComplex = () => {
+        setOpen6(!open6);
     };
     return (
         <React.Fragment>
@@ -99,7 +106,7 @@ export default function ClippedDrawer() {
                         <ListItemIcon><ApartmentIcon /></ListItemIcon>
                         <ListItemText primary="Viviendas" />
                     </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={open1} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItem
                                 button
@@ -130,7 +137,7 @@ export default function ClippedDrawer() {
                         <ListItemIcon><PersonIcon /></ListItemIcon>
                         <ListItemText primary="Propietarios" />
                     </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={open2} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItem
                                 button
@@ -157,7 +164,7 @@ export default function ClippedDrawer() {
                         <ListItemIcon><WorkIcon /></ListItemIcon>
                         <ListItemText primary="Empleados" />
                     </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={open3} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItem
                                 button
@@ -184,7 +191,7 @@ export default function ClippedDrawer() {
                         <ListItemIcon><DirectionsCarIcon /></ListItemIcon>
                         <ListItemText primary="Estacionamiento" />
                     </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={open4} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItem
                                 button
@@ -211,7 +218,7 @@ export default function ClippedDrawer() {
                         <ListItemIcon><StorageIcon /></ListItemIcon>
                         <ListItemText primary="Bodega" />
                     </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={open5} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <ListItem
                                 button
@@ -230,6 +237,33 @@ export default function ClippedDrawer() {
                                     <AddIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Agregar Puesto de bodega " />
+                            </ListItem>
+
+                        </List>
+                    </Collapse>
+                    <ListItem button onClick={handleClickHouseComplex}>
+                        <ListItemIcon><StorageIcon /></ListItemIcon>
+                        <ListItemText primary="Complejo Habitacional" />
+                    </ListItem>
+                    <Collapse in={open6} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/housecomplex'>
+                                <ListItemIcon>
+                                    <ListIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Lista de Complejos Habitacionales" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                className={classes.nested}
+                                component={Link} to='/housecomplex/create'>
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Agregar Complejo Habitacional " />
                             </ListItem>
 
                         </List>

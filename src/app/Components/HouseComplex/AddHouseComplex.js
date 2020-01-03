@@ -5,28 +5,28 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
 
 
 
-export default class AddApartment extends React.Component {
+export default class AddHouseComplex extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            codigo: ' ',
-            com: '',
-            est: '',
-            bod: '',
+            id: ' ',
+            nombre: '',
+            tipo: '',
+            direccion: '',
+            comuna: '',
             estado: '',
         };
-        this.saveApartment = this.saveApartment.bind(this);
+        this.saveHouseComplex = this.saveHouseComplex.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    saveApartment(s) {
+    saveHouseComplex(s) {
         s.preventDefault();
-        fetch('/api/apartments', {
+        fetch('/api/housecomplexs', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -39,10 +39,11 @@ export default class AddApartment extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({
-                    codigo: ' ',
-                    com: '',
-                    est: '',
-                    bod: '',
+                    id: ' ',
+                    nombre: '',
+                    tipo: '',
+                    direccion: '',
+                    comuna: '',
                     estado: '',
                 });
             })
@@ -68,48 +69,56 @@ export default class AddApartment extends React.Component {
             }}>
 
                 <Typography variant="h5" component="h6" align="center">
-                    Crear una nueva vivienda
+                    Ingresar un nuevo Complejo Habitacional
             </Typography>
-                <form onSubmit={this.saveApartment}>
+                <form onSubmit={this.saveHouseComplex}>
                     <CardContent>
 
                         <TextField
-                            name="codigo"
+                            name="id"
                             id="standard-basic"
-                            label="Codigo de Vivienda"
+                            label="ID del Complejo Habitacional"
                             margin="normal"
                             align=" center"
                             onChange={this.handleChange}
-                            value={this.state.codigo}
+                            value={this.state.id}
                         />
                         <TextField
-                            name="com"
+                            name="nombre"
                             id="standard-basic"
-                            label="Complejo Habitacional"
+                            label="Nombre del Complejo Habitacional"
                             margin="normal"
                             onChange={this.handleChange}
-                            value={this.state.com}
+                            value={this.state.nombre}
                         />
                         <TextField
-                            name="est"
+                            name="tipo"
                             id="standard-basic"
-                            label="Estacionamiento"
+                            label="Tipo de Complejo Habitacional"
                             margin="normal"
                             onChange={this.handleChange}
-                            value={this.state.est}
+                            value={this.state.tipo}
                         />
                         <TextField
-                            name="bod"
+                            name="direccion"
                             id="standard-basic"
-                            label="Bodega"
+                            label="Direccion del Complejo Habitacional"
                             margin="normal"
                             onChange={this.handleChange}
-                            value={this.state.bod}
+                            value={this.state.direccion}
+                        />
+                        <TextField
+                            name="comuna"
+                            id="standard-basic"
+                            label="Comuna del Complejo Habitacional"
+                            margin="normal"
+                            onChange={this.handleChange}
+					        value={this.state.comuna}	
                         />
                         <TextField
                             name="estado"
                             id="standard-basic"
-                            label="Estado"
+                            label="Estado del Complejo Habitacional"
                             margin="normal"
                             onChange={this.handleChange}
 					        value={this.state.estado}	

@@ -6,6 +6,8 @@ import Owner from './Components/Owner/owner';
 import Employee from './Components/Employee/employee';
 import Parking from './Components/Parking/parking';
 import Warehouse from './Components/Warehouse/warehouse';
+import HouseComplex from './Components/HouseComplex/housecomplex';
+
 import Menu from './menu';
 import { makeStyles } from '@material-ui/core/styles';
 import AddApartment from './Components/Apartment/AddApartment';
@@ -13,6 +15,8 @@ import AddOwner from './Components/Owner/AddOwner';
 import AddEmployee from './Components/Employee/AddEmployee';
 import AddParking from './Components/Parking/AddParking';
 import AddWarehouse from './Components/Warehouse/AddWarehouse';
+import AddHouseComplex from './Components/HouseComplex/AddHouseComplex';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -58,6 +62,8 @@ function App() {
                         <Route path="/parking" component={Parking} />
                         <Route path="/warehouse/create" component={AddWarehouse} />
                         <Route path="/warehouse" component={Warehouse} />
+                        <Route path="/housecomplex/create" component={AddHouseComplex} />
+                        <Route path="/housecomplex" component={HouseComplex} />
                     </Switch>
                 </main>
             </div>

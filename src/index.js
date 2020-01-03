@@ -23,6 +23,7 @@ application.use('/api/owners', require('./routes/owner.routes'));
 application.use('/api/employees', require('./routes/employee.routes'));
 application.use('/api/parkings', require('./routes/parking.routes'));
 application.use('/api/warehouses', require('./routes/warehouse.routes'));
+application.use('/api/housecomplexs', require('./routes/housecomplex.routes'));
 
 const server = http.createServer(application);
 application.set('port', process.env.PORT || 3000);

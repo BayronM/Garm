@@ -9,26 +9,27 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
-
-export default class Apartment extends React.Component {
+export default class HouseComplex extends React.Component {
     constructor() {
         super();
         this.state = {
-            apartments: []
+            housecomplexs: []
         };
     }
 
-    fetchApartments() {
-        fetch('/api/apartments')
+    fetchHouseComplexs() {
+        fetch('/api/housecomplexs')
             .then(res => res.json())
             .then(data => {
-                this.setState({ apartments: data });
+                this.setState({ housecomplexs: data });
             });
     }
 
     componentDidMount() {
-        this.fetchApartments();
+        this.fetchHouseComplexs();
     }
+
+
 
 
     render() {
@@ -44,23 +45,24 @@ export default class Apartment extends React.Component {
                     aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Codigo de Vivienda</TableCell>
-                            <TableCell align="right">Complejo Habitacional</TableCell>
-                            <TableCell align="right">Estacionamiento de Vivienda</TableCell>
-                            <TableCell align="right">Bodega de Vivienda</TableCell>
+                            <TableCell>ID Complejo Habitacional</TableCell>
+                            <TableCell align="right">Nombre del Complejo Habitacional</TableCell>
+                            <TableCell align="right">Tipo de Complejo Habitacional</TableCell>
+                            <TableCell align="right">Direccion del Complejo Habitacional</TableCell>
+                            <TableCell align="right">Comuna del Complejo Habitacional</TableCell>
                             <TableCell align="right">Operaciones</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.state.apartments.map(apartment => (
-                            <TableRow key={apartment.codigo}>
+                        {this.state.housecomplexs.map(housecomplex => (
+                            <TableRow key={housecomplex.id}>
                                 <TableCell component="th" scope="row">
-                                    {apartment.codigo}
+                                    {housecomplex.id}
                                 </TableCell>
-                                <TableCell align="right">{apartment.codigo}</TableCell>
-                                <TableCell align="right">{apartment.com}</TableCell>
-                                <TableCell align="right">{apartment.est}</TableCell>
-                                <TableCell align="right">{apartment.bod}</TableCell>
+                                <TableCell align="right">{housecomplex.nombre}</TableCell>
+                                <TableCell align="right">{housecomplex.tipo}</TableCell>
+                                <TableCell align="right">{housecomplex.direccion}</TableCell>
+                                <TableCell align="right">{housecomplex.comuna}</TableCell>
                                 <TableCell align="right">
                                     <CreateIcon/>
                                     <DeleteIcon/>
