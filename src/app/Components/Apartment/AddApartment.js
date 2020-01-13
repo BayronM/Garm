@@ -112,7 +112,7 @@ export default class AddApartment extends React.Component {
                             label="Estado"
                             margin="normal"
                             onChange={this.handleChange}
-					        value={this.state.estado}	
+                            value={this.state.estado}
                         />
                     </CardContent>
                     <CardActions>

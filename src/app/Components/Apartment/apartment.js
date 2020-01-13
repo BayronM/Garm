@@ -8,6 +8,15 @@ import Paper from '@material-ui/core/Paper';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+
 
 
 
@@ -15,8 +24,39 @@ export default class Apartment extends React.Component {
     constructor() {
         super();
         this.state = {
-            apartments: []
+            apartments: [],
+            open: false,
+            codigo: ' ',
+            com: '',
+            est: '',
+            bod: '',
+            estado: '',
         };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    openDialog(editid, codedit, comedit, estedit, bodedit, estadoedit) {
+
+        this.setState({
+            open: true,
+            _id: editid,
+            codigo: codedit,
+            com: comedit,
+            bod: bodedit,
+            est: estedit,
+            estado: estadoedit
+
+        });
+    }
+    closeDialog() {
+        this.setState({ open: false });
+    }
+
+
+    handleChange(s) {
+        const { name, value } = s.target;
+        this.setState({
+            [name]: value
+        })
     }
 
     fetchApartments() {
@@ -31,29 +71,54 @@ export default class Apartment extends React.Component {
         this.fetchApartments();
     }
 
-    deleteAparment(id) {
-        if(confirm('Are you sure you want to delete it?')) {
-          fetch(`/api/apartments/${id}`, {
-            method: 'DELETE',
+    editApartment() {
+        fetch(`/api/apartments/${this.state._id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+
+                codigo: this.state.codigo,
+                com: this.state.com,
+                est: this.state.est,
+                bod: this.state.bod,
+                estado: this.state.estado
+            }),
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
-          })
+        })
             .then(res => res.json())
             .then(data => {
-              console.log(data);
-              M.toast({html: 'Apartment deleted'});
-              this.fetchTasks();
+                console.log(data);
+                this.fetchApartments();
+                this.setState({
+                    open: false,
+                    _id: '',
+                    codigo: '',
+                    com: '',
+                    bod: '',
+                    est: '',
+                    estado: ''
+                });
             });
+    }
+
+    deleteAparment(id) {
+        if (confirm('Seguro que desea Elimiar la Vivienda del sistema ?')) {
+            fetch(`/api/apartments/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    this.fetchApartments();
+                });
         }
-      }
-
-      createlink(id){
-          link="/apartments/create/"+{id};
-
-          return link;
-      }
+    }
 
 
 
@@ -88,17 +153,78 @@ export default class Apartment extends React.Component {
                                 <TableCell align="right">{apartment.est}</TableCell>
                                 <TableCell align="right">{apartment.bod}</TableCell>
                                 <TableCell align="right">{apartment.estado}</TableCell>
-                                <TableCell><IconButton color ="secondary" onClick={() =>this.deleteAparment(apartment._id)}aria-label="delete">
+                                <TableCell><IconButton color="secondary" onClick={() => this.deleteAparment(apartment._id)} aria-label="delete">
                                     <DeleteIcon />
-                                    </IconButton>
-                                    <IconButton  href={'/apartment/create' } aria-label="Edit">
-                                    <CreateIcon />
+                                </IconButton>
+                                    <IconButton onClick={() => this.openDialog(apartment._id, apartment.codigo, apartment.com, apartment.est, apartment.bod, apartment.estado)} aria-label="Edit">
+                                        <CreateIcon />
                                     </IconButton></TableCell>
+
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+                <div >
+                    <Dialog open={this.state.open} onEnter={console.log("Hey.")}>
+                        <DialogTitle>Editar Vivienda </DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                name="codigo"
+                                id="standard-basic"
+                                label="Codigo de Vivienda"
+                                margin="normal"
+                                align=" center"
+                                onChange={this.handleChange}
+                                value={this.state.codigo}
+                            />
+                            <TextField
+                                name="com"
+                                id="standard-basic"
+                                label="Complejo Habitacional"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.com}
+                            />
+                            <TextField
+                                name="est"
+                                id="standard-basic"
+                                label="Estacionamiento"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.est}
+                            />
+                            <TextField
+                                name="bod"
+                                id="standard-basic"
+                                label="Bodega"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.bod}
+                            />
+                            <TextField
+                                name="estado"
+                                id="standard-basic"
+                                label="Estado"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.estado}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => this.editApartment()} color="primary">
+                                Guardar
+                            </Button>
+                            <Button onClick={() => this.closeDialog()} color="secondary">
+                                Salir
+                            </Button>
+
+
+                        </DialogActions>
+                    </Dialog>
+                </div>
             </Paper>
+
+
 
 
         );
