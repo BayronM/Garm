@@ -143,7 +143,6 @@ export default class Employee extends React.Component {
                             <TableCell align="right">Apellido del Empleado</TableCell>
                             <TableCell align="right">Telefono del Empleado</TableCell>
                             <TableCell align="right">Email del Empleado</TableCell>
-                            <TableCell align="right">Tipo de Empleado</TableCell>
                             <TableCell align="right">Operaciones</TableCell>
                         </TableRow>
                     </TableHead>
@@ -157,7 +156,6 @@ export default class Employee extends React.Component {
                                 <TableCell align="right">{employee.apellido}</TableCell>
                                 <TableCell align="right">{employee.telefono}</TableCell>
                                 <TableCell align="right">{employee.email}</TableCell>
-                                <TableCell align="right">{employee.tipo}</TableCell>
                                 <TableCell align="right">
                                     <IconButton color="primary" onClick={() => this.openDialog(employee._id, employee.rut, employee.nombre, employee.apellido, employee.email, employee.telefono, employee.tipo, employee.estado)} aria-label="Edit">
                                         <CreateIcon />
@@ -215,14 +213,7 @@ export default class Employee extends React.Component {
                                 onChange={this.handleChange}
                                 value={this.state.email}
                             />
-                            <TextField
-                                name="Tipo"
-                                id="standard-basic"
-                                label="Tipo de Empleado"
-                                margin="normal"
-                                onChange={this.handleChange}
-                                value={this.state.tipo}
-                            />
+
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => this.editEmployee()} color="primary">

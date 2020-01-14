@@ -117,14 +117,7 @@ export default class AddEmployee extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.email}
                         />
-                        <TextField
-                            name="Tipo"
-                            id="standard-basic"
-                            label="Tipo de Empleado"
-                            margin="normal"
-                            onChange={this.handleChange}
-                            value={this.state.tipo}
-                        />
+
 
                     </CardContent>
                     <CardActions>

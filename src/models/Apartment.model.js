@@ -4,13 +4,13 @@ const { Schema } = mongoose;
 
 
 
- //Conectar
+//Conectar
 const ApartmentSchema = new Schema({
     codigo: { type: String, required: true },
-    com: {type:String},
-    est: {type:String},
-    bod: {type:String},
-    estado: {tpye: String}
+    com: { type: String },
+    est: { type: String },
+    bod: { type: String },
+    estado: { type: String },
 });
 var Apartment = mongoose.model('Apartment', ApartmentSchema);
 

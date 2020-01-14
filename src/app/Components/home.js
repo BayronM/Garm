@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { Paper } from '@material-ui/core'
+import io from 'socket.io-client'
 
 const drawerWidth = 240;
 
@@ -26,20 +28,47 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function Home() {
+export default class Home extends React.Component {
 
-    const classes = useStyles();
-    return (
-        <React.Fragment>
-            <Typography paragraph>
-                Garm
+    constructor(props) {
+        super(props)
+        this.state = {
+            messages: []
+        }
+    }
 
+    componentDidMount() {
+        this.socket = io('/')
+        this.socket.on('arduino', message => {
+            this.setState({ messages: [message, ...this.state.messages] })
+        })
+    }
+    render() {
+        const messages = this.state.messages.map((message, index) => {
+            return <li key={index}>
+                <b>{message}</b>
+            </li>
+            });
+            
+            return (
+                <React.Fragment>
+                    <Typography paragraph>
+                        Garm
+    
             </Typography>
-            <Typography paragraph>
-                Sistema de gestion de viviendas
+                    <Typography paragraph>
+                        Sistema de gestion de viviendas
         </Typography>
-        </React.Fragment>
-    );
+                    <Paper>
+                        
+                        UIDs Arduino
+                        {messages}
+
+                    </Paper>
+                </React.Fragment>
+            );
+        }
+
 }
 
 

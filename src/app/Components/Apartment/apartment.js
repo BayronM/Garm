@@ -71,6 +71,7 @@ export default class Apartment extends React.Component {
         this.fetchApartments();
     }
 
+
     editApartment() {
         fetch(`/api/apartments/${this.state._id}`, {
             method: 'PUT',
@@ -102,6 +103,7 @@ export default class Apartment extends React.Component {
                 });
             });
     }
+
 
     deleteAparment(id) {
         if (confirm('Seguro que desea Elimiar la Vivienda del sistema ?')) {
@@ -139,7 +141,6 @@ export default class Apartment extends React.Component {
                             <TableCell align="right">Complejo Habitacional</TableCell>
                             <TableCell align="right">Estacionamiento de Vivienda</TableCell>
                             <TableCell align="right">Bodega de Vivienda</TableCell>
-                            <TableCell align="right">Estado</TableCell>
                             <TableCell align="right">Operaciones</TableCell>
                         </TableRow>
                     </TableHead>
@@ -152,13 +153,14 @@ export default class Apartment extends React.Component {
                                 <TableCell align="right">{apartment.com}</TableCell>
                                 <TableCell align="right">{apartment.est}</TableCell>
                                 <TableCell align="right">{apartment.bod}</TableCell>
-                                <TableCell align="right">{apartment.estado}</TableCell>
-                                <TableCell><IconButton color="secondary" onClick={() => this.deleteAparment(apartment._id)} aria-label="delete">
-                                    <DeleteIcon />
-                                </IconButton>
-                                    <IconButton onClick={() => this.openDialog(apartment._id, apartment.codigo, apartment.com, apartment.est, apartment.bod, apartment.estado)} aria-label="Edit">
+                                <TableCell>
+                                    <IconButton color="primary" onClick={() => this.openDialog(apartment._id, apartment.codigo, apartment.com, apartment.est, apartment.bod, apartment.estado)} aria-label="Edit">
                                         <CreateIcon />
-                                    </IconButton></TableCell>
+                                    </IconButton>
+                                    <IconButton color="secondary" onClick={() => this.deleteAparment(apartment._id)} aria-label="delete">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </TableCell>
 
                             </TableRow>
                         ))}
@@ -200,14 +202,6 @@ export default class Apartment extends React.Component {
                                 margin="normal"
                                 onChange={this.handleChange}
                                 value={this.state.bod}
-                            />
-                            <TextField
-                                name="estado"
-                                id="standard-basic"
-                                label="Estado"
-                                margin="normal"
-                                onChange={this.handleChange}
-                                value={this.state.estado}
                             />
                         </DialogContent>
                         <DialogActions>

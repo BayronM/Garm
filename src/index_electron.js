@@ -55,14 +55,9 @@ function createWindow() {
     // Carga la aplicacion desde localhost (se podria dejar con un puerto variable)
     win.loadURL('http://localhost:3000')
 
-    // Abre las herramientas de desarrollo (DevTools).
-    win.webContents.openDevTools()
 
     // Emitido cuando la ventana es cerrada.
     win.on('closed', () => {
-        // Elimina la referencia al objeto window, normalmente  guardarías las ventanas
-        // en un vector si tu aplicación soporta múltiples ventanas, este es el momento
-        // en el que deberías borrar el elemento correspondiente.
         win = null
     })
 }

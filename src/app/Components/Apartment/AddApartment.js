@@ -106,14 +106,6 @@ export default class AddApartment extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.bod}
                         />
-                        <TextField
-                            name="estado"
-                            id="standard-basic"
-                            label="Estado"
-                            margin="normal"
-                            onChange={this.handleChange}
-                            value={this.state.estado}
-                        />
                     </CardContent>
                     <CardActions>
                         <Button type="submit" variant="contained" color="primary" align="center">
