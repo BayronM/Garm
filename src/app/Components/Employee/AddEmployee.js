@@ -19,6 +19,7 @@ export default class AddEmployee extends React.Component {
             telefono: '',
             email: '',
             estado: '',
+            tipo: ''
         };
         this.saveEmployee = this.saveEmployee.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -39,7 +40,7 @@ export default class AddEmployee extends React.Component {
             .then(data => {
                 console.log(data)
                 this.setState({
-                    rut: ' ',
+                    rut: '',
                     nombre: '',
                     apellido: '',
                     telefono: '',
@@ -114,7 +115,7 @@ export default class AddEmployee extends React.Component {
                             label="Email del Empleado"
                             margin="normal"
                             onChange={this.handleChange}
-					        value={this.state.email}	
+                            value={this.state.email}
                         />
                         <TextField
                             name="Tipo"
@@ -122,16 +123,9 @@ export default class AddEmployee extends React.Component {
                             label="Tipo de Empleado"
                             margin="normal"
                             onChange={this.handleChange}
-					        value={this.state.tipo}	
+                            value={this.state.tipo}
                         />
-                        <TextField
-                            name="estado"
-                            id="standard-basic"
-                            label="Estado del Empleado"
-                            margin="normal"
-                            onChange={this.handleChange}
-					        value={this.state.estado}	
-                        />
+
                     </CardContent>
                     <CardActions>
                         <Button type="submit" variant="contained" color="primary" align="center">

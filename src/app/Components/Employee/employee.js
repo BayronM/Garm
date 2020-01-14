@@ -8,13 +8,55 @@ import Paper from '@material-ui/core/Paper';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import IconButton from '@material-ui/core/IconButton';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 export default class Employee extends React.Component {
     constructor() {
         super();
         this.state = {
-            employees: []
+            employees: [],
+            open: false,
+            rut: '',
+            nombre: '',
+            apellido: '',
+            email: '',
+            telefono: '',
+            tipo: '',
         };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    openDialog(editid, rutedit, nomedit, apeedit, emailedit, teledit, tipoedit, estedit) {
+        this.setState({
+            open: true,
+            _id: editid,
+            rut: rutedit,
+            nombre: nomedit,
+            apellido: apeedit,
+            email: emailedit,
+            telefono: teledit,
+            tipo: tipoedit,
+            estado: estedit,
+
+        })
+    }
+    closeDialog() {
+        this.setState({ open: false });
+    }
+
+
+    handleChange(s) {
+        const { name, value } = s.target;
+        this.setState({
+            [name]: value
+        })
     }
 
     fetchEmployees() {
@@ -27,6 +69,57 @@ export default class Employee extends React.Component {
 
     componentDidMount() {
         this.fetchEmployees();
+    }
+
+    editEmployee() {
+        fetch(`/api/employees/${this.state._id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                rut: this.state.rut,
+                nombre: this.state.nombre,
+                apellido: this.state.apellido,
+                email: this.state.email,
+                telefono: this.state.telefono,
+                tipo: this.state.telefono,
+
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                this.fetchEmployees();
+                this.setState({
+                    open: false,
+                    _id: '',
+                    rut: '',
+                    nombre: '',
+                    apellido: '',
+                    email: '',
+                    telefono: '',
+                    tipo: '',
+                });
+            });
+    }
+
+    deleteEmployee(id) {
+        if (confirm('Seguro que desea Elimiar al Empleado  del sistema ?')) {
+            fetch(`/api/employees/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    this.fetchEmployees();
+                });
+        }
     }
 
 
@@ -66,16 +159,83 @@ export default class Employee extends React.Component {
                                 <TableCell align="right">{employee.email}</TableCell>
                                 <TableCell align="right">{employee.tipo}</TableCell>
                                 <TableCell align="right">
-                                    <CreateIcon/>
-                                    <DeleteIcon/>
+                                    <IconButton color="primary" onClick={() => this.openDialog(employee._id, employee.rut, employee.nombre, employee.apellido, employee.email, employee.telefono, employee.tipo, employee.estado)} aria-label="Edit">
+                                        <CreateIcon />
+                                    </IconButton>
+                                    <IconButton color="secondary" onClick={() => this.deleteEmployee(employee._id)} aria-label="delete">
+                                        <DeleteIcon />
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+                <div>
+                    <Dialog open={this.state.open} onEnter={console.log("Hey.")}>
+                        <DialogTitle>Editar Empleado</DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                name="rut"
+                                id="standard-basic"
+                                label="Rut del Empleado"
+                                margin="normal"
+                                align=" center"
+                                onChange={this.handleChange}
+                                value={this.state.rut}
+                            />
+                            <TextField
+                                name="nombre"
+                                id="standard-basic"
+                                label="Nombre del Empleado"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.nombre}
+                            />
+                            <TextField
+                                name="apellido"
+                                id="standard-basic"
+                                label="Apellido del Empleado"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.apellido}
+                            />
+                            <TextField
+                                name="telefono"
+                                id="standard-basic"
+                                label="Telefono del Empleado"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.telefono}
+                            />
+                            <TextField
+                                name="email"
+                                id="standard-basic"
+                                label="Email del Empleado"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.email}
+                            />
+                            <TextField
+                                name="Tipo"
+                                id="standard-basic"
+                                label="Tipo de Empleado"
+                                margin="normal"
+                                onChange={this.handleChange}
+                                value={this.state.tipo}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => this.editEmployee()} color="primary">
+                                Guardar
+                            </Button>
+                            <Button onClick={() => this.closeDialog()} color="secondary">
+                                Salir
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+
             </Paper>
-
-
         );
     }
 }
